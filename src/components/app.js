@@ -8,11 +8,40 @@ class App extends HTMLElement {
 
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
-    const template = document.querySelector("#app-template");
-    const instance = template.content.cloneNode(true);
-    shadowRoot.appendChild(instance);
+    this.#template(shadowRoot);
     this.saveLocalstore();
-    this.render(shadowRoot);
+    this.render();
+  }
+
+  #template(shadowRoot = new ShadowRoot()) {
+    const content = document.createElement("div");
+    // styles
+    const style = document.createElement("style");
+    style.innerHTML = `@import "./src/assets/styles/app.css"`;
+    // content title
+    const contentTitle = document.createElement("div");
+    contentTitle.className = "content-title";
+    const image = document.createElement("img");
+    image.src = "./src/assets/img/logo.png";
+    image.className = "image";
+    const title = document.createElement("h1");
+    title.textContent = "Lista de Usuarios";
+    title.className = "title";
+    contentTitle.appendChild(image);
+    contentTitle.appendChild(title);
+    // content body
+    const contentBody = document.createElement("div");
+    contentBody.className = "content-body";
+    const userList = document.createElement("div");
+    userList.className = "body-list";
+    contentBody.appendChild(userList);
+    // append
+    content.appendChild(style);
+    content.appendChild(contentTitle);
+    content.appendChild(contentBody);
+    shadowRoot.appendChild(content);
+    // export
+    this._userList = userList;
   }
 
   async getUser(page) {
@@ -34,19 +63,19 @@ class App extends HTMLElement {
     localStorage.setItem("dataUsers", JSON.stringify(this.users));
   }
 
-  render(shadowRoot = new ShadowRoot()) {
-    const list = shadowRoot.querySelector("#user-list");
+  render() {
     this.users.forEach((user, index) => {
-      const item = document.createElement("item-template");
+      const item = document.createElement("item-component");
       item.setAttribute("data-id", user.id);
       item.setAttribute("data-first_name", user.first_name);
       item.setAttribute("data-last_name", user.last_name);
       item.setAttribute("data-email", user.email);
       item.setAttribute("data-avatar", user.avatar);
       item.setAttribute("data-counter", index + 1);
-      list.append(item);
+      item.setAttribute("data-basic", true);
+      this._userList.appendChild(item);
     });
   }
 }
 
-customElements.define("app-template", App);
+customElements.define("app-component", App);

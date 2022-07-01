@@ -9,44 +9,19 @@
     <script src="./src/index.js" defer></script>
   </head>
   <body>
-    <!-- app -->
-    <template id="app-template">
-      <div class="content-main">
-        <style>
-          @import "./src/assets/styles/app.css";
-        </style>
-        <div class="content-title">
-          <img src="./src/assets/img/logo.png" class="image" />
-          <h1 class="title">Lista de Usuarios</h1>
-        </div>
-        <div class="content-body">
-          <div id="user-list" class="body-list"></div>
-        </div>
-      </div>
-    </template>
-
-    <!-- item -->
-    <template id="item-template">
-      <style>
-        @import "./src/assets/styles/item.css";
-      </style>
-      <div class="content-item">
-        <img
-          src="./src/assets/img/logo.png"
-          alt="user"
-          class="item-image"
-          id="avatar"
-        />
-        <h4 class="item-title" id="first_name">Hans Medina</h4>
-        <button class="item-button" id="counter">Usuario 1</button>
-      </div>
-    </template>
-
     <!-- modal -->
-    <template id="modal-template">
-      <h6>Modal</h6>
-    </template>
+    <!-- <template id="modal-template">
+      <style>
+        @import "./src/assets/styles/modal.css";
+      </style>
+      <div class="content-modal">
+        <div class="body-modal">
+          <span class="modal-close" id="close">X</span>
+          <div id="render"></div>
+        </div>
+      </div>
+    </template> -->
 
-    <app-template></app-template>
+    <app-component></app-component>
   </body>
 </html>
