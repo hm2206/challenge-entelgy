@@ -1,5 +1,16 @@
-@import "./reset.css";
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
 
 body {
-  background: linear-gradient(90deg, rgba(241,126,164,1) 0%, rgba(255,15,132,1) 35%, rgba(249,5,75,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(241, 126, 164, 1) 0%,
+    rgba(255, 15, 132, 1) 35%,
+    rgba(249, 5, 75, 1) 100%
+  );
 }

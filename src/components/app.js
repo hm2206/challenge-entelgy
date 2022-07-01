@@ -6,10 +6,11 @@ class App extends HTMLElement {
     this.users = [];
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
     this.#template(shadowRoot);
-    this.saveLocalstore();
+    this.#styles();
+    await this.saveLocalstore();
     this.render();
   }
 
@@ -17,7 +18,6 @@ class App extends HTMLElement {
     const content = document.createElement("div");
     // styles
     const style = document.createElement("style");
-    style.innerHTML = `@import "./src/assets/styles/app.css"`;
     // content title
     const contentTitle = document.createElement("div");
     contentTitle.className = "content-title";
@@ -42,6 +42,55 @@ class App extends HTMLElement {
     shadowRoot.appendChild(content);
     // export
     this._userList = userList;
+    this._style = style;
+  }
+
+  #styles() {
+    this._style.innerHTML = `
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      
+      .content-title {
+        width: 100%;
+        background: white;
+        text-align: center;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .content-title .image {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        margin-right: 0.5em;
+        border-radius: 50%;
+      }
+      
+      .content-title .title {
+        font-size: 24px;
+        color: #1f2667;
+      }
+      
+      .content-body {
+        margin: auto auto;
+        max-width: 1300px;
+        padding: 2em 1em;
+        position: relative;
+      }
+      
+      .body-list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    `;
   }
 
   async getUser(page) {
