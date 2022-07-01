@@ -1,0 +1,42 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.content-title {
+  width: 100%;
+  background: white;
+  text-align: center;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-title .image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 0.5em;
+}
+
+.content-title .title {
+  font-size: 24px;
+  color: #1F2667;
+}
+
+.content-body {
+  margin: auto auto;
+  max-width: 1300px;
+  padding: 2em 1em;
+  position: relative;
+}
+
+.body-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
