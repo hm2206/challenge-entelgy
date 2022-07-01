@@ -8,6 +8,7 @@ class Modal extends HTMLElement {
   connectedCallback() {
     let shadowRoot = this.attachShadow({ mode: "open" });
     this.#template(shadowRoot);
+    this.#styles();
     this.render();
     this.handleClose();
   }
@@ -16,7 +17,6 @@ class Modal extends HTMLElement {
     const content = document.createElement("div");
     // styles
     const style = document.createElement("style");
-    style.innerHTML = `@import "./src/assets/styles/modal.css"`;
     // content modal
     const contentModal = document.createElement("div");
     contentModal.className = "content-modal";
@@ -37,6 +37,44 @@ class Modal extends HTMLElement {
     // export
     this._close = close;
     this._result = result;
+    this._style = style;
+  }
+
+  #styles() {
+    this._style.innerHTML = `
+      * {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+      }
+      
+      .content-modal {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        position: fixed;
+        backdrop-filter: blur(1.2px);
+        left: 0px;
+        top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .body-modal {
+        position: relative;
+      }
+      
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #455a64;
+        padding: 0.5em;
+      }
+    `;
   }
 
   getProps() {

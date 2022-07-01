@@ -8,6 +8,7 @@ class Item extends HTMLElement {
   connectedCallback() {
     const shadowRoot = this.attachShadow({ mode: "open" });
     this.#template(shadowRoot);
+    this.#styles();
     this.render(shadowRoot);
   }
 
@@ -15,7 +16,6 @@ class Item extends HTMLElement {
     const content = document.createElement("div");
     // styles
     const style = document.createElement("style");
-    style.innerHTML = `@import "./src/assets/styles/item.css"`;
     // content title
     const contentItem = document.createElement("div");
     contentItem.className = "content-item";
@@ -43,6 +43,97 @@ class Item extends HTMLElement {
     this._title = title;
     this._email = email;
     this._btnCounter = btnCounter;
+    this._style = style;
+  }
+
+  #styles() {
+    this._style.innerHTML = `
+      * {
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+      }
+      
+      .content-item {
+        width: 500px;
+        height: auto;
+        background-color: #fff;
+        border-radius: 0.2em;
+        box-shadow: 0px 0px 20px -8px #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        padding: 2em 1em;
+        margin: 0.5em;
+        cursor: pointer;
+      }
+      
+      .content-item.basic {
+        width: 300px;
+        box-shadow: 0px 0px 20px -8px #050ef9;
+        transition: 0.2s ease-in-out;
+      }
+      
+      .content-item.basic:hover {
+        transition: all 0.25s ease-in;
+        transform: scale(1.15);
+      }
+      
+      .item-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 0.5em;
+        box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.5);
+      }
+      
+      .basic .item-image {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .item-title {
+        font-size: 16px;
+        margin: 1em 0px;
+        color: #37474f;
+      }
+      
+      .item-email {
+        color: #78909c;
+        font-size: 13px;
+        margin-top: -10px;
+        margin-bottom: 1em;
+      }
+      
+      .basic .item-email {
+        display: none;
+      }
+      
+      .item-button {
+        color: #2196f3;
+        font-weight: bold;
+        background: #ffff;
+        border: 2px solid #2196f3;
+        padding: 0.7em 2em;
+        border-radius: 0.3em;
+        margin-top: 1em;
+        box-shadow: 0px 10px 20px -10px #1565c0;
+      }
+      
+      .basic .item-button {
+        color: #fff;
+        background: linear-gradient(
+          60deg,
+          rgba(28, 215, 233, 1) 0%,
+          rgba(15, 161, 255, 1) 35%,
+          rgba(33, 150, 243, 1) 100%
+        );
+        border: 0px;
+      }
+  
+    `;
   }
 
   getProps() {
